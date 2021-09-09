@@ -1,14 +1,26 @@
-const path = require('path');
+const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const CopyPlugin = require("copy-webpack-plugin")
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
-const isDev = !isProd
+
 
 const getFilename = ext => isProd ? `bundle.[hash].${ext}` : `bundle.${ext}`
 
+const getJsLoaders = () => {
+  const loaders = [{
+    loader: 'babel-loader',
+    options: {
+      presets: ['@babel/preset-env']
+    }
+  }]
+
+  if (!isProd) loaders.push('eslint-loader')
+
+  return loaders
+}
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: ['@babel/polyfill', './index.js'],
@@ -56,12 +68,7 @@ module.exports = {
       {
         test: /\.m?js$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ['@babel/preset-env']
-          }
-        }
+        use: getJsLoaders()
       }
     ],
   },
