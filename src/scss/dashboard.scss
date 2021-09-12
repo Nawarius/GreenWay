@@ -1,0 +1,77 @@
+@import 'variables';
+@import 'mixins';
+
+.db {
+    
+    &__header {
+        position: fixed;
+        top:0;
+        right: 0;
+        left: 0;
+        height: $db-header-height;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    &__new {
+        margin-top: $db-header-height;
+        background: gainsboro;
+        padding:20px;
+    }
+    &__create{
+        width: 160px;
+        height: 160px;
+        border-radius: 4px;
+        border: 1px solid $border-color;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        background: ghostwhite;
+
+        &:hover{
+            color: green;
+            border-color: green;
+            border-width: 2px;
+        }
+    }
+
+    &__table{
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    &__list-header{
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+        font-weight: 800;
+    }
+    &__list{
+        @include clearList()
+    }
+    &__record{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 14px 12px 16px;
+        margin-bottom: 10px;
+
+        &:hover{
+            background: coral;
+            border-radius: 25px;
+        }
+        a {
+            text-decoration: none;
+            font-size: 14px;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+
+}
+
