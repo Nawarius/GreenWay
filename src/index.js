@@ -1,4 +1,4 @@
-import './test.js'
+import { Excel } from './components/excel/Excel'
 import './scss/index.scss'
 
-console.log('here')
+new Excel()
