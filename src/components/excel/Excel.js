@@ -1,16 +1,20 @@
+import GreenWay from "../../core/Greenway"
+
 export class Excel {
     constructor(selector, options) {
         this.$el = document.querySelector(selector)
         this.components = options.components || []
     }
     getRoot() {
-        const $root = document.createElement('div')
-
-        this.components.forEach(Com => {
-            const component = new Com()
-            $root.insertAdjacentHTML('beforeend', component.toHtml())
+        const $root = GreenWay.create('div', 'excel')
+        
+        this.components.forEach(Component => {
+            const $el = GreenWay.create('div', Component.className)
+            const component = new Component($el)
+            $el.innerHTML = component.toHtml()
+            $root.append($el)
         })
-        console.log($root)
+
         return $root
     }
     render() {
